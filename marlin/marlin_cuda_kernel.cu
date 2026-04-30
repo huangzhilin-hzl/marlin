@@ -65,10 +65,20 @@ __device__ inline void cp_async4_pred(void* smem_ptr, const void* glob_ptr, bool
 
 // Asynchronous global->shared copy with a cache hint indicating that the values may be evicted immediately; used for
 // quantized weights B, which are only accessed precisely once and should thus not pollute the L2 cache which we need
-// for inputs A and outputs C. 
+// for inputs A and outputs C.
 __device__ inline void cp_async4_stream(void* smem_ptr, const void* glob_ptr) {
   const int BYTES = 16;
   uint32_t smem = static_cast<uint32_t>(__cvta_generic_to_shared(smem_ptr));
+#if defined(__CUDA_ARCH__) && __CUDA_ARCH__ >= 900
+  // nvcc 13.1 + sm_90 (verified on H20) miscompiles the L2::cache_hint variant of cp.async inside the
+  // groupsize-aware small-batch specialization Marlin<256,1,8,8,4,8>: the createpolicy result is dropped
+  // and the resulting LDGSTS reads an uninitialized uniform register as its descriptor, trapping with
+  // cudaErrorIllegalInstruction. The cache_hint is only a perf hint anyway, so on Hopper we fall back
+  // to plain cp.async.
+  asm volatile(
+    "cp.async.cg.shared.global [%0], [%1], %2;\n" :: "r"(smem), "l"(glob_ptr), "n"(BYTES)
+  );
+#else
   asm volatile(
     "{\n"
     "   .reg .b64 p;\n"
@@ -76,6 +86,7 @@ __device__ inline void cp_async4_stream(void* smem_ptr, const void* glob_ptr) {
     "   cp.async.cg.shared.global.L2::cache_hint [%0], [%1], %2, p;\n"
     "}\n" :: "r"(smem), "l"(glob_ptr), "n"(BYTES)
   );
+#endif
 }
 
 // Async copy fence.
