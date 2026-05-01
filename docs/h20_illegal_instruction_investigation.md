@@ -11,12 +11,12 @@
 
 | 项 | 值 |
 |---|---|
-| Pod | `molou/molou-sglang-h20-nod35-agent` |
+| 运行环境 | 内部 H20 测试环境 |
 | GPU | NVIDIA H20 (8 卡，sm_90, 78 SMs) |
 | Driver | 550.127.08 |
 | CUDA Runtime | 13.1 |
 | nvcc | 13.1.80 (Nov 2025 build) |
-| 代码路径 | `/app/marlin` |
+| 代码路径 | Marlin checkout |
 
 ## 1. 拿到的"诊断"和我的判断
 
@@ -42,7 +42,7 @@
   ├─ 否定"架构不支持"：H20 = sm_90，LDGSTS 显然支持
   └─ 真因待查
         ↓
-进 pod 复现
+在测试环境复现
         ↓
 矩阵化定位（独立子进程，避免 CUDA context 污染）
         ↓
@@ -59,15 +59,14 @@ compute-sanitizer 落到指令偏移
 
 ## 3. 执行步骤
 
-### 3.1 进 pod、确认环境
+### 3.1 确认测试环境
 
 ```bash
-kubectl get pods -n molou | grep nod35
-kubectl exec -n molou molou-sglang-h20-nod35-agent -- nvidia-smi -L
-kubectl exec -n molou molou-sglang-h20-nod35-agent -- nvcc --version
+nvidia-smi -L
+nvcc --version
 ```
 
-确认：8 张 H20，CUDA 13.1，code 在 `/app/marlin`，已经 build 好的 `.so` 在 `build/lib.linux-x86_64-cpython-312/marlin_cuda.cpython-312-x86_64-linux-gnu.so`。
+确认：8 张 H20，CUDA 13.1，已经 build 好的 `.so` 在 `build/lib.linux-x86_64-cpython-312/marlin_cuda.cpython-312-x86_64-linux-gnu.so`。
 
 ### 3.2 确认 .so 编译目标
 

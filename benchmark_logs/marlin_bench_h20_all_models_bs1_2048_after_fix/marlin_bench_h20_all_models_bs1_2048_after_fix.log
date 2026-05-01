@@ -1,0 +1,217 @@
+# Consolidated Marlin H20 benchmark log
+# Source runs: bs1-128 and bs256-2048
+
+## Source: bs1_128
+## Command: .venv/bin/python bench.py --groupsizes=-1,128 --batch-sizes 1,2,4,8,16,32,64,128 --warmup 1 --iters 10 --cooldown 0.2
+
+device=cuda:0, name=NVIDIA H20, capability=9.0, sms=78
+warning: Marlin README says this kernel is not optimized for Hopper; H20 results are for compatibility/perf exploration.
+
+groupsize=-1
+
+ideal
+batch=0001: s=0.00062, TFLOP/s=005.156, GB/s=1289.444, speedup=1.39
+batch=0002: s=0.00062, TFLOP/s=010.347, GB/s=1294.106, speedup=1.38
+batch=0004: s=0.00062, TFLOP/s=020.712, GB/s=1295.856, speedup=1.38
+batch=0008: s=0.00062, TFLOP/s=041.397, GB/s=1296.299, speedup=1.39
+batch=0016: s=0.00061, TFLOP/s=083.383, GB/s=1308.150, speedup=1.41
+batch=0032: s=0.00111, TFLOP/s=091.707, GB/s=0722.235, speedup=0.79
+batch=0064: s=0.00222, TFLOP/s=092.157, GB/s=0365.774, speedup=0.75
+batch=0128: s=0.00443, TFLOP/s=092.247, GB/s=0185.954, speedup=0.66
+
+Llama7B
+batch=0001: s=0.00011, TFLOP/s=003.711, GB/s=0929.645, speedup=1.39
+batch=0002: s=0.00011, TFLOP/s=007.436, GB/s=0932.720, speedup=1.31
+batch=0004: s=0.00011, TFLOP/s=014.846, GB/s=0933.485, speedup=1.33
+batch=0008: s=0.00011, TFLOP/s=029.495, GB/s=0932.121, speedup=1.36
+batch=0016: s=0.00011, TFLOP/s=058.436, GB/s=0932.898, speedup=1.46
+batch=0032: s=0.00018, TFLOP/s=070.722, GB/s=0576.066, speedup=0.94
+batch=0064: s=0.00033, TFLOP/s=076.812, GB/s=0325.369, speedup=0.73
+batch=0128: s=0.00060, TFLOP/s=084.621, GB/s=0193.032, speedup=0.70
+
+Llama13B
+batch=0001: s=0.00015, TFLOP/s=004.106, GB/s=1028.259, speedup=1.40
+batch=0002: s=0.00015, TFLOP/s=008.194, GB/s=1027.082, speedup=1.37
+batch=0004: s=0.00015, TFLOP/s=016.383, GB/s=1028.898, speedup=1.74
+batch=0008: s=0.00015, TFLOP/s=032.629, GB/s=1028.839, speedup=1.42
+batch=0016: s=0.00015, TFLOP/s=064.795, GB/s=1029.991, speedup=1.45
+batch=0032: s=0.00026, TFLOP/s=077.703, GB/s=0627.723, speedup=0.87
+batch=0064: s=0.00048, TFLOP/s=082.877, GB/s=0345.559, speedup=0.79
+batch=0128: s=0.00092, TFLOP/s=087.435, GB/s=0193.680, speedup=0.75
+
+Llama33B
+batch=0001: s=0.00024, TFLOP/s=004.493, GB/s=1124.720, speedup=1.38
+batch=0002: s=0.00024, TFLOP/s=008.993, GB/s=1126.532, speedup=1.35
+batch=0004: s=0.00024, TFLOP/s=017.930, GB/s=1124.808, speedup=1.41
+batch=0008: s=0.00024, TFLOP/s=035.900, GB/s=1129.655, speedup=1.38
+batch=0016: s=0.00024, TFLOP/s=071.389, GB/s=1130.348, speedup=1.37
+batch=0032: s=0.00040, TFLOP/s=084.247, GB/s=0675.407, speedup=0.83
+batch=0064: s=0.00077, TFLOP/s=087.531, GB/s=0359.642, speedup=0.73
+batch=0128: s=0.00151, TFLOP/s=089.834, GB/s=0193.559, speedup=0.70
+
+Llama65B
+batch=0001: s=0.00035, TFLOP/s=004.637, GB/s=1160.376, speedup=1.36
+batch=0002: s=0.00035, TFLOP/s=009.300, GB/s=1164.496, speedup=1.36
+batch=0004: s=0.00035, TFLOP/s=018.564, GB/s=1163.762, speedup=1.36
+batch=0008: s=0.00035, TFLOP/s=037.097, GB/s=1165.822, speedup=1.38
+batch=0016: s=0.00035, TFLOP/s=073.819, GB/s=1165.926, speedup=1.70
+batch=0032: s=0.00060, TFLOP/s=085.624, GB/s=0683.164, speedup=0.86
+batch=0064: s=0.00116, TFLOP/s=088.619, GB/s=0360.746, speedup=0.69
+batch=0128: s=0.00227, TFLOP/s=090.447, GB/s=0191.459, speedup=0.68
+
+Falcon180B
+batch=0001: s=0.00087, TFLOP/s=005.076, GB/s=1269.514, speedup=1.37
+batch=0002: s=0.00087, TFLOP/s=010.156, GB/s=1270.547, speedup=1.37
+batch=0004: s=0.00087, TFLOP/s=020.354, GB/s=1273.972, speedup=1.38
+batch=0008: s=0.00087, TFLOP/s=040.639, GB/s=1273.458, speedup=1.39
+batch=0016: s=0.00088, TFLOP/s=081.022, GB/s=1272.711, speedup=1.38
+batch=0032: s=0.00158, TFLOP/s=089.635, GB/s=0707.621, speedup=0.78
+batch=0064: s=0.00311, TFLOP/s=091.289, GB/s=0364.027, speedup=0.68
+batch=0128: s=0.00617, TFLOP/s=092.099, GB/s=0187.346, speedup=0.67
+
+groupsize=128
+
+ideal
+batch=0001: s=0.00068, TFLOP/s=004.668, GB/s=1203.878, speedup=1.25
+batch=0002: s=0.00068, TFLOP/s=009.338, GB/s=1204.297, speedup=1.26
+batch=0004: s=0.00068, TFLOP/s=018.777, GB/s=1211.391, speedup=1.26
+batch=0008: s=0.00068, TFLOP/s=037.422, GB/s=1208.327, speedup=1.25
+batch=0016: s=0.00064, TFLOP/s=079.462, GB/s=1285.362, speedup=1.34
+batch=0032: s=0.00117, TFLOP/s=087.358, GB/s=0709.280, speedup=0.75
+batch=0064: s=0.00224, TFLOP/s=091.236, GB/s=0373.238, speedup=0.67
+batch=0128: s=0.00447, TFLOP/s=091.438, GB/s=0189.896, speedup=0.65
+
+Llama7B
+batch=0001: s=0.00012, TFLOP/s=003.439, GB/s=0887.688, speedup=1.23
+batch=0002: s=0.00012, TFLOP/s=006.920, GB/s=0894.331, speedup=1.25
+batch=0004: s=0.00011, TFLOP/s=013.866, GB/s=0898.264, speedup=1.22
+batch=0008: s=0.00012, TFLOP/s=027.653, GB/s=0900.175, speedup=1.22
+batch=0016: s=0.00012, TFLOP/s=055.066, GB/s=0905.269, speedup=1.27
+batch=0032: s=0.00019, TFLOP/s=067.697, GB/s=0567.501, speedup=0.81
+batch=0064: s=0.00033, TFLOP/s=076.389, GB/s=0332.653, speedup=0.69
+batch=0128: s=0.00061, TFLOP/s=083.491, GB/s=0195.414, speedup=0.74
+
+Llama13B
+batch=0001: s=0.00019, TFLOP/s=003.289, GB/s=0848.777, speedup=1.23
+batch=0002: s=0.00016, TFLOP/s=007.658, GB/s=0989.157, speedup=1.72
+batch=0004: s=0.00018, TFLOP/s=013.965, GB/s=0903.718, speedup=1.18
+batch=0008: s=0.00016, TFLOP/s=030.556, GB/s=0992.687, speedup=1.30
+batch=0016: s=0.00017, TFLOP/s=060.263, GB/s=0986.741, speedup=1.28
+batch=0032: s=0.00027, TFLOP/s=074.311, GB/s=0618.071, speedup=0.81
+batch=0064: s=0.00049, TFLOP/s=081.645, GB/s=0350.178, speedup=0.76
+batch=0128: s=0.00093, TFLOP/s=086.622, GB/s=0197.052, speedup=0.73
+
+Llama33B
+batch=0001: s=0.00026, TFLOP/s=004.140, GB/s=1068.124, speedup=1.24
+batch=0002: s=0.00026, TFLOP/s=008.299, GB/s=1071.449, speedup=1.24
+batch=0004: s=0.00025, TFLOP/s=016.641, GB/s=1075.924, speedup=1.25
+batch=0008: s=0.00025, TFLOP/s=033.270, GB/s=1078.857, speedup=1.27
+batch=0016: s=0.00027, TFLOP/s=063.375, GB/s=1033.877, speedup=1.17
+batch=0032: s=0.00042, TFLOP/s=080.948, GB/s=0668.400, speedup=0.77
+batch=0064: s=0.00078, TFLOP/s=086.844, GB/s=0367.246, speedup=0.79
+batch=0128: s=0.00152, TFLOP/s=089.230, GB/s=0197.612, speedup=0.70
+
+Llama65B
+batch=0001: s=0.00038, TFLOP/s=004.271, GB/s=1101.723, speedup=1.24
+batch=0002: s=0.00038, TFLOP/s=008.549, GB/s=1103.468, speedup=1.24
+batch=0004: s=0.00038, TFLOP/s=016.741, GB/s=1081.732, speedup=1.22
+batch=0008: s=0.00038, TFLOP/s=034.146, GB/s=1105.961, speedup=1.29
+batch=0016: s=0.00038, TFLOP/s=068.387, GB/s=1113.073, speedup=1.29
+batch=0032: s=0.00063, TFLOP/s=082.172, GB/s=0675.409, speedup=0.84
+batch=0064: s=0.00118, TFLOP/s=087.350, GB/s=0366.099, speedup=0.67
+batch=0128: s=0.00229, TFLOP/s=089.753, GB/s=0195.395, speedup=0.67
+
+Falcon180B
+batch=0001: s=0.00096, TFLOP/s=004.620, GB/s=1191.375, speedup=1.24
+batch=0002: s=0.00096, TFLOP/s=009.268, GB/s=1195.396, speedup=1.25
+batch=0004: s=0.00096, TFLOP/s=018.504, GB/s=1194.123, speedup=1.25
+batch=0008: s=0.00096, TFLOP/s=037.049, GB/s=1196.955, speedup=1.27
+batch=0016: s=0.00096, TFLOP/s=074.091, GB/s=1199.827, speedup=1.25
+batch=0032: s=0.00164, TFLOP/s=086.657, GB/s=0705.163, speedup=0.75
+batch=0064: s=0.00313, TFLOP/s=090.679, GB/s=0372.604, speedup=0.68
+batch=0128: s=0.00624, TFLOP/s=091.108, GB/s=0190.861, speedup=0.67
+
+
+## Source: bs256_2048
+## Command: .venv/bin/python bench.py --groupsizes=-1,128 --batch-sizes 256,512,1024,2048 --warmup 1 --iters 10 --cooldown 0.2
+
+device=cuda:0, name=NVIDIA H20, capability=9.0, sms=78
+warning: Marlin README says this kernel is not optimized for Hopper; H20 results are for compatibility/perf exploration.
+
+groupsize=-1
+
+ideal
+batch=0256: s=0.00873, TFLOP/s=093.521, GB/s=0097.188, speedup=0.66
+batch=0512: s=0.01750, TFLOP/s=093.302, GB/s=0051.400, speedup=0.66
+batch=1024: s=0.03514, TFLOP/s=092.948, GB/s=0028.512, speedup=0.66
+batch=2048: s=0.07033, TFLOP/s=092.880, GB/s=0017.153, speedup=0.65
+
+Llama7B
+batch=0256: s=0.00115, TFLOP/s=088.699, GB/s=0115.643, speedup=0.70
+batch=0512: s=0.00227, TFLOP/s=089.884, GB/s=0073.262, speedup=0.69
+batch=1024: s=0.00450, TFLOP/s=090.662, GB/s=0051.743, speedup=0.68
+batch=2048: s=0.00901, TFLOP/s=090.574, GB/s=0040.627, speedup=0.67
+
+Llama13B
+batch=0256: s=0.00179, TFLOP/s=089.679, GB/s=0111.014, speedup=0.74
+batch=0512: s=0.00352, TFLOP/s=091.013, GB/s=0068.196, speedup=0.69
+batch=1024: s=0.00702, TFLOP/s=091.345, GB/s=0046.128, speedup=0.67
+batch=2048: s=0.01402, TFLOP/s=091.516, GB/s=0035.036, speedup=0.67
+
+Llama33B
+batch=0256: s=0.00297, TFLOP/s=091.507, GB/s=0107.754, speedup=0.69
+batch=0512: s=0.00593, TFLOP/s=091.432, GB/s=0062.998, speedup=0.69
+batch=1024: s=0.01178, TFLOP/s=092.094, GB/s=0040.959, speedup=0.68
+batch=2048: s=0.02355, TFLOP/s=092.184, GB/s=0029.740, speedup=0.67
+
+Llama65B
+batch=0256: s=0.00448, TFLOP/s=091.821, GB/s=0104.661, speedup=0.68
+batch=0512: s=0.00892, TFLOP/s=092.205, GB/s=0060.058, speedup=0.67
+batch=1024: s=0.01780, TFLOP/s=092.432, GB/s=0037.630, speedup=0.66
+batch=2048: s=0.03560, TFLOP/s=092.413, GB/s=0026.337, speedup=0.66
+
+Falcon180B
+batch=0256: s=0.01226, TFLOP/s=092.673, GB/s=0097.997, speedup=0.68
+batch=0512: s=0.02444, TFLOP/s=093.009, GB/s=0052.930, speedup=0.68
+batch=1024: s=0.04907, TFLOP/s=092.647, GB/s=0030.102, speedup=0.67
+batch=2048: s=0.09791, TFLOP/s=092.863, GB/s=0018.834, speedup=0.66
+
+groupsize=128
+
+ideal
+batch=0256: s=0.00892, TFLOP/s=091.544, GB/s=0097.923, speedup=0.65
+batch=0512: s=0.01781, TFLOP/s=091.706, GB/s=0051.918, speedup=0.65
+batch=1024: s=0.03557, TFLOP/s=091.818, GB/s=0028.865, speedup=0.65
+batch=2048: s=0.07114, TFLOP/s=091.826, GB/s=0017.308, speedup=0.65
+
+Llama7B
+batch=0256: s=0.00117, TFLOP/s=087.468, GB/s=0116.635, speedup=0.68
+batch=0512: s=0.00229, TFLOP/s=089.089, GB/s=0073.937, speedup=0.68
+batch=1024: s=0.00454, TFLOP/s=089.885, GB/s=0051.967, speedup=0.68
+batch=2048: s=0.00908, TFLOP/s=089.835, GB/s=0040.629, speedup=0.67
+
+Llama13B
+batch=0256: s=0.00181, TFLOP/s=088.576, GB/s=0112.294, speedup=0.72
+batch=0512: s=0.00357, TFLOP/s=089.734, GB/s=0068.577, speedup=0.68
+batch=1024: s=0.00710, TFLOP/s=090.316, GB/s=0046.283, speedup=0.67
+batch=2048: s=0.01420, TFLOP/s=090.362, GB/s=0034.932, speedup=0.67
+
+Llama33B
+batch=0256: s=0.00301, TFLOP/s=090.226, GB/s=0108.954, speedup=0.68
+batch=0512: s=0.00598, TFLOP/s=090.740, GB/s=0063.883, speedup=0.69
+batch=1024: s=0.01194, TFLOP/s=090.869, GB/s=0041.096, speedup=0.67
+batch=2048: s=0.02387, TFLOP/s=090.920, GB/s=0029.673, speedup=0.66
+
+Llama65B
+batch=0256: s=0.00454, TFLOP/s=090.581, GB/s=0105.975, speedup=0.67
+batch=0512: s=0.00906, TFLOP/s=090.829, GB/s=0060.529, speedup=0.66
+batch=1024: s=0.01805, TFLOP/s=091.127, GB/s=0037.784, speedup=0.65
+batch=2048: s=0.03611, TFLOP/s=091.114, GB/s=0026.309, speedup=0.65
+
+Falcon180B
+batch=0256: s=0.01243, TFLOP/s=091.404, GB/s=0099.430, speedup=0.67
+batch=0512: s=0.02483, TFLOP/s=091.549, GB/s=0053.489, speedup=0.67
+batch=1024: s=0.04956, TFLOP/s=091.724, GB/s=0030.498, speedup=0.66
+batch=2048: s=0.09916, TFLOP/s=091.697, GB/s=0018.946, speedup=0.65
+
+

@@ -1,0 +1,12 @@
+environment=internal_h20_test_environment
+gpu=NVIDIA H20
+groupsizes=-1,128
+batch_sizes=1,2,4,8,16,32,64,128,256,512,1024,2048
+models=ideal,Llama7B,Llama13B,Llama33B,Llama65B,Falcon180B
+command_1=.venv/bin/python bench.py --groupsizes=-1,128 --batch-sizes 1,2,4,8,16,32,64,128 --warmup 1 --iters 10 --cooldown 0.2
+command_2=.venv/bin/python bench.py --groupsizes=-1,128 --batch-sizes 256,512,1024,2048 --warmup 1 --iters 10 --cooldown 0.2
+summary=summary.md
+log=marlin_bench_h20_all_models_bs1_2048_after_fix.log
+log_sha256=ae819a73b6ffaa5b2f728517875c6d4d36fcfcfbfb792cdd8e25528c4e66ca6a
+source_log_sha256_bs1_128=7362bdb0c72284a49f7ca41b9eefdb417e4e40fefc4ee6c63f1218b5fdf75b9a
+source_log_sha256_bs256_2048=3bb6dc2eb82edf0700f376213f1164e1e05c4c48e2b01175d535b39db2e1b543
